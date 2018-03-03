@@ -1,1 +1,1 @@
-protobuf_gen
+protobuf_gen>=0.0.2

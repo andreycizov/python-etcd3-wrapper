@@ -2,8 +2,16 @@ language: python
 python:
     - 3.6
 
+env:
+  matrix:
+    - ETCD_VERSION=v3.1.10
+    - ETCD_VERSION=v3.3.1
+
 install:
     - pip install -U tox tox-travis codecov
+    - curl -L https://github.com/coreos/etcd/releases/download/$ETCD_VERSION/etcd-$ETCD_VERSION-linux-amd64.tar.gz -o etcd-$ETCD_VERSION-linux-amd64.tar.gz
+    - tar xzvf etcd-$ETCD_VERSION-linux-amd64.tar.gz
+    - export PATH=$PATH:etcd-$ETCD_VERSION-linux-amd64
 
 script: tox
 
