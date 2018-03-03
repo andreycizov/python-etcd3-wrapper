@@ -96,3 +96,7 @@ target/
 *.gz
 *.zip
 
+/pb_includes/etcd
+/pb_includes/grpc-gateway
+/pb_includes/protobuf
+
