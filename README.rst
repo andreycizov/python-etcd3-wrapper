@@ -2,8 +2,8 @@
 etcd3wrapper
 ============
 
-.. image:: https://img.shields.io/pypi/v/etcd3-wrapper.svg
-        :target: https://pypi.python.org/pypi/etcd3-wrapper
+.. image:: https://img.shields.io/pypi/v/etcd3wrapper.svg
+        :target: https://pypi.python.org/pypi/etcd3wrapper
 
 .. image:: https://img.shields.io/travis/andreycizov/python-etcd3-wrapper.svg
         :target: https://travis-ci.org/andreycizov/python-etcd3-wrapper
@@ -20,7 +20,10 @@ etcd3wrapper
         :target: https://codecov.io/gh/andreycizov/python-etcd3-wrapper/?branch=master
 
 
-Show some info here
+An Etcd3 client library that tries to extensively cover the whole API provided by the database with type
+inference. The wrapper itself is auto-generated from the protobuf files, so all of the functionality originally
+provided by etcd3 is there. The best way to go about this is to see the tests, since they try to
+cover all of the code.
 
 Basic usage:
 ____________
@@ -30,9 +33,3 @@ ____________
     # show some examples here.
 
 
-Advanced usage:
-_______________
-
-The wrapper itself is auto-generated from the protobuf files, so all of the functionality originally
-provided by etcd3 is there. The best way to go about this is to see the tests, since they try to
-cover all of the code.
