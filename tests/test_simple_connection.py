@@ -69,7 +69,7 @@ class TestSimpleConnection(unittest.TestCase):
         )]))
 
         for i in range(N):
-            kv.Put(PutRequest(PRE + b'1', value=VAL_FN(i)))
+            kv.Put(PutRequest(PRE + VAL_FN(i), value=VAL_FN(i)))
 
         events_parsed = {}
 
