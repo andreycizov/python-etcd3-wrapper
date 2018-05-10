@@ -23,7 +23,16 @@ etcd3wrapper
 Show some info here
 
 Basic usage:
+____________
 
 .. code-block:: python
 
     # show some examples here.
+
+
+Advanced usage:
+_______________
+
+The wrapper itself is auto-generated from the protobuf files, so all of the functionality originally
+provided by etcd3 is there. The best way to go about this is to see the tests, since they try to
+cover all of the code.
