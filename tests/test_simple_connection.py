@@ -64,8 +64,10 @@ class TestSimpleConnection(unittest.TestCase):
         N = 16
         VAL_FN = lambda x: str(x).encode()
 
+        wr = WatchCreateRequest(key=PRE, range_end=PRE[:-1] + bytes([PRE[-1] + 1]))
+
         responses = watch.Watch(iter([WatchRequest(
-            create_request=WatchCreateRequest(key=PRE, range_end=PRE + b'\x00')
+            create_request=wr
         )]))
 
         for i in range(N):
@@ -91,6 +93,3 @@ class TestSimpleConnection(unittest.TestCase):
                     break
             if stop:
                 break
-
-
-

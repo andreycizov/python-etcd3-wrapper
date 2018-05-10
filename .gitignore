@@ -100,3 +100,4 @@ target/
 /pb_includes/grpc-gateway
 /pb_includes/protobuf
 
+.coverage*
