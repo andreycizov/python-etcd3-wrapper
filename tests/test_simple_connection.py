@@ -3,8 +3,9 @@ import unittest
 from urllib.parse import urlparse
 
 from etcd3wrapper.helpers import create_channel
+from etcd3wrapper.kv import Event
 from etcd3wrapper.rpc import KV, PutRequest, RangeRequest, DeleteRangeRequest, CompactionRequest, TxnRequest, Compare, \
-    RequestOp
+    RequestOp, Watch, WatchRequest, WatchCreateRequest
 
 
 def from_url(url):
@@ -52,5 +53,43 @@ class TestSimpleConnection(unittest.TestCase):
 
         self.assertEqual(resp.succeeded, True)
 
-    def test_delete_key(self):
+    def test_watch_key(self):
         ch = from_url(os.environ['TEST_ETCD_URL'])
+
+        watch = Watch(ch)
+        kv = KV(ch)
+
+        PRE = b'123'
+        N = 16
+        VAL_FN = lambda x: str(x).encode()
+
+        responses = watch.Watch(iter([WatchRequest(
+            create_request=WatchCreateRequest(key=PRE, range_end=PRE + b'\x00')
+        )]))
+
+        for i in range(N):
+            kv.Put(PutRequest(PRE + b'1', value=VAL_FN(i)))
+
+        events_parsed = {}
+
+        stop = False
+
+        for response in responses:
+            for ev in response.events:
+                self.assertEqual(ev.type, Event.EventType.PUT)
+                key = ev.kv.key
+
+                expected_val = int(key[len(PRE):].decode())
+
+                self.assertEqual(ev.kv.value, VAL_FN(expected_val))
+
+                events_parsed[key] = True
+
+                if len(events_parsed) == N:
+                    stop = True
+                    break
+            if stop:
+                break
+
+        
+
