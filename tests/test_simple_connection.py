@@ -55,9 +55,10 @@ class TestSimpleConnection(unittest.TestCase):
 
     def test_watch_key(self):
         ch = from_url(os.environ['TEST_ETCD_URL'])
+        ch2 = from_url(os.environ['TEST_ETCD_URL'])
 
         watch = Watch(ch)
-        kv = KV(ch)
+        kv = KV(ch2)
 
         PRE = b'123'
         N = 16
@@ -91,5 +92,5 @@ class TestSimpleConnection(unittest.TestCase):
             if stop:
                 break
 
-        
+
 
